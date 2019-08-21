@@ -1,16 +1,16 @@
-#Scala Talks
+# Scala Talks
 
-#Binding
+# Binding
 #### What is Binding?
 Binding means the link between reference and actual code e.g. 
 when you refer a variable it's bounded to the code where it is defined, 
 similarly when you call a method, it's linked to the code where a method is defined.
 
-####Types of binding
+#### Types of binding
 1. Early Binding
 2. Late Binding
 
-#Types of Polymorphism.
+# Types of Polymorphism.
 
                                 ------------------------------------------------
                                 |                                              |       
@@ -47,7 +47,7 @@ Coercion represents implicit parameter type conversion to the type expected by a
 Ad-hoc polymorphism, by contrast, allows a polymorphic value to exhibit different behaviors when “viewed” at different types. 
 The most common example of ad-hoc polymorphism is overloading, which associates a single function symbol with many implementations; 
 the compiler (or the runtime system, depending on whether overloading resolution is static or dynamic) chooses an appropriate implementation for each application of the function, based on the types of the arguments.
-####Operator Overloading
+#### Operator Overloading
 ```
 class Complex { 
 private: 
@@ -71,14 +71,14 @@ int main()
     c3.print(); 
 } 
 ```
-####Function Overloading
+#### Function Overloading
 ```
 def add(s1: String, s2: String): String = s1 + s2
 
 def add(x1: Int, x2: Int): Int = x1 + x2    
 ```
 
-##Limits of Subtyping.
+## Limits of Subtyping.
 
 What we need is a generic function parametrised for different types. So let's introduce type parameter:
 
@@ -107,7 +107,7 @@ Those coming from OOP get confused by typeclasses because they tend to think of 
 We can think of them as Java interfaces, only better. They originally come from Haskell.
 Type classes are a powerful feature of Scala but Scala itself doesn't have any native support for type classes.
 
-##Type Class Pattern in Scala.
+## Type Class Pattern in Scala.
 
 Let's go back to the beginning. We have a signature like: 
 ```
