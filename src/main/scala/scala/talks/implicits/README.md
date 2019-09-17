@@ -1,6 +1,6 @@
 # Implicits
 
-## Where does the compiler look for implicits?
+# Types of Implicits 
 
 ## Implicit parameters
 A method can have an implicit parameter marked by implicit keyword at the start of the parameter list. If the parameters in that parameter list are not passed explicitly, Scala will look if it can get an implicit value of the correct type and if it can, pass it automatically.
@@ -17,7 +17,7 @@ For instance, normally a double cannot be used as an integer, because it loses p
     required: Int
           val x: Int = 3.5
  ```
-However, you can define an implicit conversion to smooth this over:
+However, we can define an implicit conversion to cover this: 
 
 ```
  implicit def doubleToInt(x: Double) = x.toInt
@@ -35,11 +35,24 @@ The compiler then inserts a call to doubleToInt automatically. Behind the scenes
 This is literally an implicit conversion. We don't explicitly ask for conversion. 
 Instead, we marked `doubleToInt` as an available implicit conversion by bringing it into scope as a single identifier, and then the compiler automatically used it when it needed to convert from a Double to an Int.
 
+## Implicit conversions as implicit parameters
+There’s one situation where an implicit is both an implicit conversion and an implicit parameter.
+```
+ def getIndex[T, CC](seq: CC, value: T)(implicit conv: CC => Seq[T]) = seq.indexOf(value)
+ 
+ getIndex("abc", 'a')
+ ```
+
 ## Context Bounds
 What is Context Bound?
-A context Bound describes an implicit value. It is used to declare that for some type A, there’s an implicit value of type B[A] available.
+Introduced in Scala 2.8.0. A context Bound describes an implicit value. It is used to declare that for some type A, there’s an implicit value of type B[A] available.
 
 `def f[A: B](a: A) = g(a)   //where g requires an implicit value of type B[A]`
-
+Context bounds are implemented with implicit parameters, given their definition.
 ## Where does the compiler look for implicits?
-
+1. Implicits Defined in Lexical Scope
+2. Implicits Defined in Implicit Scope
+3. Companion Objects of a Type
+4. Implicit scope of an argument’s type
+5. Implicit scope of type arguments
+6. Outer Objects for Nested Types
