@@ -1,6 +1,7 @@
 # Scala Talks
 
-# Binding
+## A bit of Polymorphism...
+## Binding
 #### What is Binding?
 Binding means the link between reference and actual code e.g. 
 when you refer a variable it's bounded to the code where it is defined, 
@@ -10,7 +11,7 @@ similarly when you call a method, it's linked to the code where a method is defi
 1. Early Binding
 2. Late Binding
 
-# Types of Polymorphism.
+## Types of Polymorphism.
 
                                 ------------------------------------------------
                                 |                                              |       
@@ -47,35 +48,36 @@ Coercion represents implicit parameter type conversion to the type expected by a
 Ad-hoc polymorphism, by contrast, allows a polymorphic value to exhibit different behaviors when “viewed” at different types. 
 The most common example of ad-hoc polymorphism is overloading, which associates a single function symbol with many implementations; 
 the compiler (or the runtime system, depending on whether overloading resolution is static or dynamic) chooses an appropriate implementation for each application of the function, based on the types of the arguments.
+
 #### Operator Overloading
 ```
-class Complex { 
-private: 
-    int real, imag; 
-public: 
-    Complex(int r = 0, int i =0)  {real = r;   imag = i;} 
-       
-    Complex operator + (Complex const &obj) { 
-         Complex res; 
-         res.real = real + obj.real; 
-         res.imag = imag + obj.imag; 
-         return res; 
+    class Complex { 
+    private: 
+        int real, imag; 
+    public: 
+        Complex(int r = 0, int i =0)  {real = r;   imag = i;} 
+           
+        Complex operator + (Complex const &obj) { 
+             Complex res; 
+             res.real = real + obj.real; 
+             res.imag = imag + obj.imag; 
+             return res; 
+        } 
+        void print() { cout << real << " + i" << imag << endl; } 
+    }; 
+      
+    int main() 
+    { 
+        Complex c1(10, 5), c2(2, 4); 
+        Complex c3 = c1 + c2; 
+        c3.print(); 
     } 
-    void print() { cout << real << " + i" << imag << endl; } 
-}; 
-  
-int main() 
-{ 
-    Complex c1(10, 5), c2(2, 4); 
-    Complex c3 = c1 + c2; 
-    c3.print(); 
-} 
 ```
 #### Function Overloading
 ```
-def add(s1: String, s2: String): String = s1 + s2
+    def add(s1: String, s2: String): String = s1 + s2
 
-def add(x1: Int, x2: Int): Int = x1 + x2    
+    def add(x1: Int, x2: Int): Int = x1 + x2    
 ```
 
 ## Limits of Subtyping.
@@ -100,7 +102,7 @@ Here we're using `Upper Bound` clause to accept only subtypes of `Addable` trait
 
 But what with `Integer` or `String`? We cannot make them subtypes of `Addable`.
 
-## Type classes - Theory.
+# Type classes.
 A `type class` is a sort of interface that defines some behaviour. 
 If a type is part of type class, that means it supports and implements the behaviour the typeclass describes.
 Those coming from OOP get confused by typeclasses because they tend to think of them as classes in Object Oriented Programming.
